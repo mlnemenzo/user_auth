@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { changeAuth } from '../actions'
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';
+import { signOut } from '../actions';
 
 
 class Nav extends Component {
 
     renderLinks() {
-        const { auth, changeAuth } = this.props;
+        const { auth, signOut } = this.props;
         const btnStyle = {
             width: '131px'
         }
@@ -16,19 +15,32 @@ class Nav extends Component {
             return (
             <Fragment>
             <li>
+                <Link to = "/movie-quote">Movie Quote</Link>
+            </li>
+            <li>
                 <Link to = "/secret_doc">Secret Docs</Link>
             </li>
             <li>
                 <Link to = "/operative_list">Operatives List</Link>
             </li>
             <li>
-                <button style = {btnStyle} className = "btn red darken" onClick = {() => changeAuth(false)}>Sign Out</button>
+                <button onClick = {signOut} className = "btn grey darken-2">Sign Out</button>
             </li>
             </Fragment>
             );
         }
 
-        return <button style = {btnStyle} className = "btn grey" onClick = {() => changeAuth(true)}>Sign In</button>
+        return (
+            <Fragment>
+            <li>
+                <Link to = "/sign-in">Sign In</Link>
+            </li>
+            <li>
+                <Link to = "/sign-up">Sign Up</Link>
+            </li>
+            </Fragment>
+        )
+        
     }
 
     render() {
@@ -57,4 +69,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { changeAuth: changeAuth })(Nav);
+export default connect(mapStateToProps, { signOut })(Nav);
